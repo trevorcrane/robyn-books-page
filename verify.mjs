@@ -8,13 +8,16 @@ page.on('pageerror', (err) => errors.push(err.message));
 await page.goto('http://127.0.0.1:4173/', { waitUntil: 'networkidle' });
 const title = await page.title();
 const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
+const bodyText = await page.locator('body').innerText();
 await page.getByRole('button', { name: /join the waitlist/i }).first().click();
-await page.getByLabel(/name/i).fill('Mobile Test');
+await page.getByLabel(/first name/i).fill('Mobile');
 await page.getByLabel(/email/i).fill('mobile@example.com');
+await page.getByLabel(/phone/i).fill('555-555-1212');
 await page.getByRole('button', { name: /save my spot/i }).click();
 await page.getByRole('heading', { name: /you’re on the waitlist/i }).waitFor();
 await page.screenshot({ path: '/tmp/robyn-mobile.png', fullPage: true });
 const hrefs = await page.$$eval('a', (links) => links.map((a) => ({ text: a.textContent.trim(), href: a.href, target: a.target, rel: a.rel })));
+const fields = await page.$$eval('#waitlist-form input', (inputs) => inputs.map((input) => ({ id: input.id, name: input.name, type: input.type, required: input.required })));
 await browser.close();
 
 const required = [
@@ -29,4 +32,8 @@ for (const url of required) {
 }
 if (overflow) throw new Error('Mobile viewport has horizontal overflow');
 if (errors.length) throw new Error(`Console/page errors: ${errors.join('; ')}`);
-console.log(JSON.stringify({ ok: true, title, viewport: '390x844', horizontalOverflow: overflow, consoleErrors: errors.length, screenshot: '/tmp/robyn-mobile.png', requiredLinks: required.length }, null, 2));
+if (!bodyText.includes('Don’t miss the greatest wealth transformation in history.')) throw new Error('Missing required waitlist headline copy');
+for (const field of ['first_name', 'email', 'phone']) {
+  if (!fields.some((item) => item.name === field && item.required)) throw new Error(`Missing required waitlist field: ${field}`);
+}
+console.log(JSON.stringify({ ok: true, title, viewport: '390x844', horizontalOverflow: overflow, consoleErrors: errors.length, screenshot: '/tmp/robyn-mobile.png', requiredLinks: required.length, waitlistFields: fields }, null, 2));

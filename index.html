@@ -108,10 +108,12 @@
         <h2 id="modal-title">Join the Waitlist</h2>
         <p id="modal-description">Be the first to know when Robyn’s new book, <em>Wealth Transformation</em>, is available. Join the waitlist for early access, launch updates, and special bonus resources.</p>
         <form id="waitlist-form" class="waitlist-form" action="thank-you.html" method="get" data-success-mode="message">
-          <label for="name">Name</label>
-          <input id="name" name="name" type="text" autocomplete="name" placeholder="Your name" required />
+          <label for="first-name">First name</label>
+          <input id="first-name" name="first_name" type="text" autocomplete="given-name" placeholder="Your first name" required />
           <label for="email">Email</label>
           <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required />
+          <label for="phone">Phone</label>
+          <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="Your phone number" required />
           <button class="button button-gold" type="submit">Save My Spot <span aria-hidden="true">→</span></button>
         </form>
         <div class="form-success" id="form-success" tabindex="-1" hidden>

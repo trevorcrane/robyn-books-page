@@ -12,7 +12,7 @@ Single-page static landing page for Robyn Crane's books.
 
 ## Waitlist form configuration
 
-The modal form currently uses a local placeholder success state:
+The modal form currently uses a local placeholder success state with first name, email, and phone fields:
 
 ```html
 <form action="thank-you.html" method="get" data-success-mode="message">
