@@ -18,6 +18,15 @@ await page.getByRole('heading', { name: /you’re on the waitlist/i }).waitFor()
 await page.screenshot({ path: '/tmp/robyn-mobile.png', fullPage: true });
 const hrefs = await page.$$eval('a', (links) => links.map((a) => ({ text: a.textContent.trim(), href: a.href, target: a.target, rel: a.rel })));
 const fields = await page.$$eval('#waitlist-form input', (inputs) => inputs.map((input) => ({ id: input.id, name: input.name, type: input.type, required: input.required })));
+const waitlistHeadline = await page.locator('#waitlist-title').evaluate((heading) => {
+  const gold = heading.querySelector('.headline-gold');
+  return {
+    text: heading.innerText.trim(),
+    headingColor: getComputedStyle(heading).color,
+    goldText: gold?.innerText.trim(),
+    goldColor: gold ? getComputedStyle(gold).color : null
+  };
+});
 await browser.close();
 
 const required = [
@@ -32,8 +41,10 @@ for (const url of required) {
 }
 if (overflow) throw new Error('Mobile viewport has horizontal overflow');
 if (errors.length) throw new Error(`Console/page errors: ${errors.join('; ')}`);
-if (!bodyText.includes('Don’t miss the greatest wealth transformation in history.')) throw new Error('Missing required waitlist headline copy');
+if (!bodyText.includes('Don’t Miss The Greatest Wealth Transformation In History.')) throw new Error('Missing required waitlist headline copy');
+if (waitlistHeadline.goldText !== 'Transformation') throw new Error('Transformation is not wrapped for gold styling');
+if (waitlistHeadline.headingColor === waitlistHeadline.goldColor) throw new Error('Transformation color does not differ from the rest of the headline');
 for (const field of ['first_name', 'email', 'phone']) {
   if (!fields.some((item) => item.name === field && item.required)) throw new Error(`Missing required waitlist field: ${field}`);
 }
-console.log(JSON.stringify({ ok: true, title, viewport: '390x844', horizontalOverflow: overflow, consoleErrors: errors.length, screenshot: '/tmp/robyn-mobile.png', requiredLinks: required.length, waitlistFields: fields }, null, 2));
+console.log(JSON.stringify({ ok: true, title, viewport: '390x844', horizontalOverflow: overflow, consoleErrors: errors.length, screenshot: '/tmp/robyn-mobile.png', requiredLinks: required.length, waitlistHeadline, waitlistFields: fields }, null, 2));

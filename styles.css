@@ -230,8 +230,9 @@ main {
   border-top: 4px solid var(--gold);
   border-radius: var(--radius);
 }
-.waitlist-panel h2 { margin: 0; font-size: clamp(1.8rem, 5vw, 2.35rem); letter-spacing: -.03em; }
-.waitlist-panel h2 em { color: var(--gold-dark); }
+.waitlist-panel h2 { margin: 0; color: var(--black); font-size: clamp(1.8rem, 5vw, 2.35rem); letter-spacing: -.03em; }
+.waitlist-panel h2 em,
+.waitlist-panel .headline-gold { color: var(--gold-dark); }
 .waitlist-panel p { color: var(--muted); margin: 14px auto 28px; }
 
 .footer {
