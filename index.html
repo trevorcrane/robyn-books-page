@@ -16,8 +16,24 @@
 
     <aside class="announcement" aria-label="New book announcement">
       <p>New book: <em>Wealth Transformation</em>. Join the waitlist.</p>
-      <button class="button button-dark waitlist-trigger" type="button" data-open-modal="waitlist">Get Early Access</button>
+      <button class="button button-light waitlist-trigger" type="button" data-open-modal="waitlist">Get Early Access</button>
     </aside>
+
+    <header class="site-header" aria-label="Robyn Crane site navigation">
+      <div class="nav-wrap">
+        <a class="brand" href="https://robyncrane.com/" target="_blank" rel="noopener noreferrer" aria-label="Robyn Crane home">
+          <img src="assets/robyn-crane-logo-w.svg" alt="Robyn Crane" />
+        </a>
+        <nav class="primary-nav" aria-label="Primary navigation">
+          <a href="https://robyncrane.com/about/" target="_blank" rel="noopener noreferrer">About</a>
+          <a href="https://robyncrane.com/speaking/" target="_blank" rel="noopener noreferrer">Speaking</a>
+          <a href="https://robyncrane.com/podcast/" target="_blank" rel="noopener noreferrer">Podcast</a>
+          <a href="https://robyncrane.com/books1/" target="_blank" rel="noopener noreferrer">Books</a>
+          <a href="https://robyncrane.com/blog/" target="_blank" rel="noopener noreferrer">Blog</a>
+        </nav>
+        <a class="tag-link" href="https://robyncrane.com/tag-challenge/" target="_blank" rel="noopener noreferrer">Take the TAG Challenge</a>
+      </div>
+    </header>
 
     <main id="main">
       <section class="intro" aria-labelledby="page-title">
@@ -90,7 +106,7 @@
         <button class="modal-close" type="button" data-close-modal aria-label="Close waitlist popup">×</button>
         <p class="kicker muted">Wealth Transformation</p>
         <h2 id="modal-title">Join the Waitlist</h2>
-        <p id="modal-description">Placeholder popup until Len/Trevor provide final waitlist content and trigger. This is wired, styled, accessible, and ready to connect to the final form provider.</p>
+        <p id="modal-description">Be the first to know when Robyn’s new book, <em>Wealth Transformation</em>, is available. Join the waitlist for early access, launch updates, and special bonus resources.</p>
         <form id="waitlist-form" class="waitlist-form" action="thank-you.html" method="get" data-success-mode="message">
           <label for="name">Name</label>
           <input id="name" name="name" type="text" autocomplete="name" placeholder="Your name" required />
@@ -99,8 +115,8 @@
           <button class="button button-gold" type="submit">Save My Spot <span aria-hidden="true">→</span></button>
         </form>
         <div class="form-success" id="form-success" tabindex="-1" hidden>
-          <h3>You’re on the interest list.</h3>
-          <p>Thank you. This placeholder state is ready to swap for final copy or redirect to the final email platform.</p>
+          <h3>You’re on the waitlist.</h3>
+          <p>Thank you — we’ll send updates as soon as early access and launch details are ready.</p>
           <a href="thank-you.html" target="_blank" rel="noopener noreferrer">Open thank-you page</a>
         </div>
       </div>

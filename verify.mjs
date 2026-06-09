@@ -12,7 +12,7 @@ await page.getByRole('button', { name: /join the waitlist/i }).first().click();
 await page.getByLabel(/name/i).fill('Mobile Test');
 await page.getByLabel(/email/i).fill('mobile@example.com');
 await page.getByRole('button', { name: /save my spot/i }).click();
-await page.getByText(/on the interest list/i).waitFor();
+await page.getByRole('heading', { name: /you’re on the waitlist/i }).waitFor();
 await page.screenshot({ path: '/tmp/robyn-mobile.png', fullPage: true });
 const hrefs = await page.$$eval('a', (links) => links.map((a) => ({ text: a.textContent.trim(), href: a.href, target: a.target, rel: a.rel })));
 await browser.close();
